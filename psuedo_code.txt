@@ -1,0 +1,40 @@
+start
+    for city in city_list do
+        create house_list
+        repeat for n pages
+            get url f'https://www.zoopla.co.uk/for-sale/property/{city}/?q={city}&search_source=home&pn={i}'
+            get all the anchor tag with specified class in the page
+            search for unique house links in the list generated above
+            add all the links to the house_list 
+
+        create excel file out of house_list and save it
+    end for
+
+end
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+(data collector)
+
+start
+    for city in city_list
+        get house_links for the city
+        
+        for link in house_links do
+            create dictionary with desired columns and initialize
+            1. get the url link and parse it using beautifulsoup4
+            2. get all div elements with specified class that contains information about beds, reception and bathroom
+            3. get all h1 headings with specified class that contains information about house type and terrace
+            4. get address element in the webpage to get the address
+            5. geocode the address obtained in the step 4 using locationiq api
+            6. get all div elements with specified class that contains information about tenure
+            7. get all ul and p elements with specified classes that contains information about other utilities
+            8. get the price element and get price using regex
+            store data collected in the steps 1-8 in the dataframe
+        endfor
+
+        store all the data collected above of the given city in the excel file.
+    endfor
+
+end            
+ 
